@@ -1,0 +1,39 @@
+.battlearea {
+  grid-area: b;
+  background-color: rgb(207, 204, 34);
+  text-align: center;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 300px 900px 300px;
+  grid-template-rows: 1fr 5fr 1fr 1fr;
+  grid-template-areas:
+    "knopka knopka knopka"
+    "player1 letter player2"
+    "input input input"
+    "answer answer answer";
+}
+.knopka {
+  grid-area: knopka;
+  background-color: rgb(109, 114, 67);
+}
+.player1 {
+  grid-area: player1;
+  background-color: rgb(43, 202, 241);
+}
+.player2 {
+  grid-area: player2;
+}
+.letter {
+  grid-area: letter;
+  align-self: center;
+}
+.answer {
+  grid-area: answer;
+  background-color: rgb(241, 43, 182);
+}
+.input {
+  grid-area: input;
+  width: 250px;
+  justify-self: center;
+  text-align: center;
+}
