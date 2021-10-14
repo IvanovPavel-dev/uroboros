@@ -9,7 +9,7 @@
   grid-template-areas:
     "knopka knopka knopka"
     "player1 letter player2"
-    "answer answer answer";
+    "result result result";
 }
 .knopka {
   grid-area: knopka;
@@ -26,8 +26,8 @@
   grid-area: letter;
   align-self: center;
 }
-.answer {
-  grid-area: answer;
+.result {
+  grid-area: result;
   background-color: rgb(241, 43, 182);
 }
 .input {
