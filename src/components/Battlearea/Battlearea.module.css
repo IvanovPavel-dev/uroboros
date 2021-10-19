@@ -5,7 +5,7 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
-  grid-template-rows: 1fr 2fr 1fr;
+  grid-template-rows: 400px 800px 400px;
   grid-template-areas:
     "player1 letter player2"
     "result result result";
@@ -36,12 +36,31 @@
   text-align: center;
 }
 .img {
+  position: relative;
+  top: 0px;
   height: 350px;
+  transition: opacity 1s linear;
 }
 .imgOpacity {
   height: 350px;
-  opacity: 0.5;
+  opacity: 0.4;
+  transition: opacity 1s linear;
 }
 .heart {
   height: 40px;
+  position: relative;
+}
+.cross {
+  position: relative;
+  top: -380px;
+  height: 350px;
+  z-index: 2;
+  opacity: 0;
+}
+.crossOpacity {
+  position: relative;
+  top: -380px;
+  height: 350px;
+  z-index: 2;
+  opacity: 1;
 }

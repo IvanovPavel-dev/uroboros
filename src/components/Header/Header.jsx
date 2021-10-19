@@ -7,7 +7,7 @@ let article =
 const Header = () => {
   return (
     <header className={s.wraper}>
-      <div className={s.header}>Uroboros</div>
+      <div className={s.header}>Уроборос</div>
       <div>Правила игры</div>
       <div className={s.article}>{article}</div>
     </header>

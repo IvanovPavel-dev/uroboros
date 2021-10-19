@@ -133,8 +133,14 @@ const Battlearea = () => {
           src="https://i.pinimg.com/originals/54/90/13/549013cde1373f75086b99b2d3c4e423.png"
           alt={"logo"}
         />
-        <img className={s.heart} src={firstPlayerHartsImg} alt={"logo"} />
-        <div>{firstPlayerHarts}</div>
+        <div>
+          <img className={s.heart} src={firstPlayerHartsImg} alt={"logo"} />
+        </div>
+        <img
+          className={firstPlayerHarts === 0 ? s.crossOpacity : s.cross}
+          src="https://cs9.pikabu.ru/post_img/2020/06/26/6/1593158708124569366.png"
+          alt={"logo"}
+        />
       </div>
       <div className={s.player2}>
         <img
@@ -142,8 +148,14 @@ const Battlearea = () => {
           src="https://i.pinimg.com/originals/fe/2a/7d/fe2a7d2785461fd4d56707853817bef4.png"
           alt={"logo"}
         />
-        <img className={s.heart} src={secondPlayerHartsImg} alt={"logo"} />
-        <div>{secondPlayerHarts}</div>
+        <div>
+          <img className={s.heart} src={secondPlayerHartsImg} alt={"logo"} />
+        </div>
+        <img
+          className={secondPlayerHarts === 0 ? s.crossOpacity : s.cross}
+          src="https://cs9.pikabu.ru/post_img/2020/06/26/6/1593158708124569366.png"
+          alt={"logo"}
+        />
       </div>
       <div className={s.letter}>
         <div className={s.knopka}>
