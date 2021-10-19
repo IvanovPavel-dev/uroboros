@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import s from "./Battlearea.module.css";
 //import { v4 as uuidv4 } from "uuid";
-import pic1 from "./wer.png";
-import pic2 from "./wer1.png";
 
 const Battlearea = () => {
   const [input, setInput] = useState("");
@@ -11,8 +9,17 @@ const Battlearea = () => {
   const [isFirstPlayer, setIsFirstPlayer] = useState(true);
   const [wordsArray, setWordsArray] = useState([]);
   const [mooveAnswer, setMooveAnswer] = useState("начнём");
-  let [firstPlayerHarts, setFirstPlayerHearts] = useState(5);
-  let [secondPlayerHarts, setSecondPlayerHearts] = useState(5);
+  const [firstPlayerHarts, setFirstPlayerHearts] = useState(5);
+  const [secondPlayerHarts, setSecondPlayerHearts] = useState(5);
+  const [isValidInput, setIsValidInput] = useState(false);
+
+  useEffect(() => {
+    if (input === "") {
+      setIsValidInput(false);
+    } else {
+      setIsValidInput(true);
+    }
+  }, [input]);
 
   function onFormSubmit(event) {
     event.preventDefault();
@@ -48,6 +55,18 @@ const Battlearea = () => {
     setInput("");
   }
 
+  function startNewGame(event) {
+    //event.preventDefault();
+    setInput("");
+    setWordsArray([]);
+    setLastLetter("");
+    setGeneralFirstLetter("");
+    setIsFirstPlayer(true);
+    setMooveAnswer("начнём");
+    setFirstPlayerHearts(5);
+    setSecondPlayerHearts(5);
+  }
+
   return (
     <div className={s.battlearea}>
       <div className={s.player1}>
@@ -70,17 +89,21 @@ const Battlearea = () => {
 
       <div className={s.letter}>
         <div className={s.knopka}>
-          <button onclick="newGameButton()">Start new game BUTTON</button>
+          <button onClick={startNewGame}>Start new game BUTTON</button>
         </div>
         <div>{generalFirstLetter}</div>
-        <input
-          type="text"
-          placeholder="Следующий ход..."
-          value={input}
-          required
-          onChange={(event) => setInput(event.target.value)}
-        />
-        <button onClick={onFormSubmit}>Ход</button>
+        <form>
+          <input
+            type="text"
+            placeholder="Следующий ход..."
+            value={input}
+            required
+            onChange={(event) => setInput(event.target.value)}
+          />
+        </form>
+        <button disabled={!isValidInput} onClick={onFormSubmit}>
+          Ход
+        </button>
 
         <div className={s.answer}>{mooveAnswer}</div>
       </div>
