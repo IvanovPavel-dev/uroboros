@@ -4,16 +4,15 @@
   text-align: center;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 450px 600px 450px;
-  grid-template-rows: 1fr 3fr 1fr;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-rows: 1fr 2fr 1fr;
   grid-template-areas:
-    "knopka knopka knopka"
     "player1 letter player2"
     "result result result";
 }
 .knopka {
-  grid-area: knopka;
   background-color: rgb(109, 114, 67);
+  align-self: top;
 }
 .player1 {
   grid-area: player1;
@@ -32,7 +31,10 @@
 }
 .input {
   grid-area: input;
-  width: 250px;
+
   justify-self: center;
   text-align: center;
+}
+.img {
+  height: 350px;
 }
