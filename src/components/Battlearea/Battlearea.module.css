@@ -38,3 +38,10 @@
 .img {
   height: 350px;
 }
+.imgOpacity {
+  height: 350px;
+  opacity: 0.5;
+}
+.heart {
+  height: 40px;
+}
