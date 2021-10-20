@@ -1,11 +1,10 @@
 .app-wrapper {
   margin: 0 auto;
-  /* display: grid; */
   width: 1000px;
   font-family: Helvetica;
-  /* grid-template-areas:
-    "h"
-    "b"
-    "r";
-  grid-template-rows: 1fr 5fr 10fr; */
+  color: lightgray;
+}
+::selection {
+  color: rgb(0, 0, 0);
+  background: rgb(212, 212, 212);
 }

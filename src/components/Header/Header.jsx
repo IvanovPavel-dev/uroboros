@@ -2,7 +2,7 @@ import React from "react";
 import s from "./Header.module.css";
 
 let article =
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum";
+  "Два гордых викинга решили посоперничать между собой за право сразиться с мифическим змеем! Они должны поочереди называть слова, каждое седующее слово должно начинаться на ту букву, на которую закончилось слово предыдущее. Слова не должны повторяться. У каждого из викингов по 5 жизней. Когда один из воинов пал, появляется Уроборосс!!! Его можно одолеть сказав ему слово, не только начинающееся с последней буквы последнего слова, но и заканчивающегося на самую первую букву в этой игре(она в центре, чтобы не забыть...). Иначе змей тебя съест!";
 
 const Header = () => {
   return (

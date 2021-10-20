@@ -1,11 +1,13 @@
 .wraper {
   grid-area: h;
-  background-color: rgb(20, 113, 235);
+  background-color: #404040;
   text-align: center;
 }
 .header {
   font-size: 70px;
+  padding: 5px;
 }
 .article {
   font-size: 18px;
+  padding: 20px 50px;
 }

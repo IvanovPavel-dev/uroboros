@@ -11,7 +11,7 @@ import deth from "../../images/deth.png";
 const Battlearea = () => {
   const [input, setInput] = useState("");
   const [lastLetter, setLastLetter] = useState("");
-  const [generalFirstLetter, setGeneralFirstLetter] = useState("");
+  const [generalFirstLetter, setGeneralFirstLetter] = useState("#");
   const [isFirstPlayer, setIsFirstPlayer] = useState(true);
   const [wordsArray, setWordsArray] = useState([]);
   const [mooveAnswer, setMooveAnswer] = useState("начнём");
@@ -138,6 +138,7 @@ const Battlearea = () => {
             setsnakeAppear(false);
             setisWin(true);
             setMooveAnswer("Змеюка повержена!");
+            setWordsArray([...wordsArray, { word: input, key: uuidv4() }]);
           } else {
             setMooveAnswer("ТЫ МЁРТВ!");
           }
@@ -158,11 +159,10 @@ const Battlearea = () => {
   }
 
   function startNewGame(event) {
-    //event.preventDefault();
     setInput("");
     setWordsArray([]);
     setLastLetter("");
-    setGeneralFirstLetter("");
+    setGeneralFirstLetter("#");
     setIsFirstPlayer(true);
     setMooveAnswer("начнём");
     setFirstPlayerHearts(5);
@@ -204,18 +204,27 @@ const Battlearea = () => {
       </div>
       <div className={s.letter}>
         <div className={s.knopka}>
-          <button onClick={startNewGame}>Start new game BUTTON</button>
+          <button className={s.button} onClick={startNewGame}>
+            НОВАЯ ИГРА
+          </button>
         </div>
         <div>{generalFirstLetter}</div>
         <input
           type="text"
           placeholder="Следующий ход..."
+          className={s.input}
           value={input}
-          disabled={mooveAnswer === "ТЫ МЁРТВ!"}
+          disabled={
+            mooveAnswer === "ТЫ МЁРТВ!" || mooveAnswer === "Змеюка повержена!"
+          }
           required
           onChange={(event) => setInput(event.target.value)}
         />
-        <button disabled={!isValidInput} onClick={onFormSubmit}>
+        <button
+          className={s.buttonSmall}
+          disabled={!isValidInput}
+          onClick={onFormSubmit}
+        >
           Ход
         </button>
         <div className={s.answer}>{mooveAnswer}</div>
@@ -223,15 +232,22 @@ const Battlearea = () => {
       <div className={s.result}>
         <div>
           {snakeAppear && (
-            <img src="https://key0.cc/images/small/10643_3a392b79930ddfc3f00bd751505386a9.png" />
+            <img
+              className={s.snake}
+              src="https://key0.cc/images/small/10643_3a392b79930ddfc3f00bd751505386a9.png"
+              alt={"logo"}
+            />
           )}
-
           {isWin && (
-            <img src="https://freepngimg.com/thumb/ouroboros/1-2-ouroboros-free-png-image.png" />
+            <img
+              className={s.snake}
+              src="https://freepngimg.com/thumb/ouroboros/1-2-ouroboros-free-png-image.png"
+              alt={"logo"}
+            />
           )}
         </div>
-        <div>
-          {wordsArray.map((item) => {
+        <div className={s.result}>
+          {[...wordsArray].reverse().map((item) => {
             return <li key={item.key}>{item.word}</li>;
           })}
         </div>
