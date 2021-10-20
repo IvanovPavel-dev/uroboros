@@ -20,7 +20,8 @@ const Battlearea = () => {
   const [firstPlayerHartsImg, setFirstPlayerHeartsImg] = useState();
   const [secondPlayerHartsImg, setSecondPlayerHeartsImg] = useState();
   const [isValidInput, setIsValidInput] = useState(false);
-
+  const [isWin, setisWin] = useState(false);
+  const [snakeAppear, setsnakeAppear] = useState(false);
   useEffect(() => {
     if (input === "") {
       setIsValidInput(false);
@@ -77,36 +78,79 @@ const Battlearea = () => {
     }
   }, [secondPlayerHarts]);
 
+  function lettersMatch() {
+    setWordsArray([...wordsArray, { word: input, key: uuidv4() }]);
+    setLastLetter(Array.from(input)[input.length - 1]);
+    setIsFirstPlayer(isFirstPlayer === true ? false : true);
+    setMooveAnswer("правильно");
+  }
+  useEffect(() => {
+    if (firstPlayerHarts === 0) {
+      setsnakeAppear(true);
+      setMooveAnswer("появился ЗМЕЙ!");
+    } else {
+      setsnakeAppear(false);
+    }
+  }, [firstPlayerHarts]);
+
+  useEffect(() => {
+    if (secondPlayerHarts === 0) {
+      setsnakeAppear(true);
+      setMooveAnswer("появился ЗМЕЙ!");
+    } else {
+      setsnakeAppear(false);
+    }
+  }, [secondPlayerHarts]);
+
+  function lettersMissMatch() {
+    setIsFirstPlayer(isFirstPlayer === true ? false : true);
+    setMooveAnswer("буквы не совпали!!!");
+    isFirstPlayer === true
+      ? setFirstPlayerHearts(firstPlayerHarts - 1)
+      : setSecondPlayerHearts(secondPlayerHarts - 1);
+  }
+
+  function wordInArrayMissMatch() {
+    setIsFirstPlayer(isFirstPlayer === true ? false : true);
+    setMooveAnswer("слово уже было!!!");
+    isFirstPlayer === true
+      ? setFirstPlayerHearts(firstPlayerHarts - 1)
+      : setSecondPlayerHearts(secondPlayerHarts - 1);
+  }
+
   function onFormSubmit(event) {
     event.preventDefault();
-
     if (wordsArray.length === 0) {
       setIsFirstPlayer(false);
-
       setGeneralFirstLetter(input[0]);
       setLastLetter(Array.from(input)[input.length - 1]);
       setWordsArray([...wordsArray, { word: input, key: uuidv4() }]);
       setMooveAnswer("продолжим");
     } else {
-      if (wordsArray.some((e) => e.word === input)) {
-        //if (wordsArray.includes(input)) {
-        setIsFirstPlayer(isFirstPlayer === true ? false : true);
-        setMooveAnswer("слово уже было!!!");
-        isFirstPlayer === true
-          ? setFirstPlayerHearts(firstPlayerHarts - 1)
-          : setSecondPlayerHearts(secondPlayerHarts - 1);
-      } else {
-        if (lastLetter === input[0]) {
-          setWordsArray([...wordsArray, { word: input, key: uuidv4() }]);
-          setLastLetter(Array.from(input)[input.length - 1]);
-          setIsFirstPlayer(isFirstPlayer === true ? false : true);
-          setMooveAnswer("правильно");
+      if (firstPlayerHarts === 0 || secondPlayerHarts === 0) {
+        if (wordsArray.some((e) => e.word === input)) {
+          setMooveAnswer("ТЫ МЁРТВ!");
         } else {
-          setIsFirstPlayer(isFirstPlayer === true ? false : true);
-          setMooveAnswer("буквы не совпали!!!");
-          isFirstPlayer === true
-            ? setFirstPlayerHearts(firstPlayerHarts - 1)
-            : setSecondPlayerHearts(secondPlayerHarts - 1);
+          if (
+            lastLetter === input[0] &&
+            generalFirstLetter === Array.from(input)[input.length - 1]
+          ) {
+            setsnakeAppear(false);
+            setisWin(true);
+            setMooveAnswer("Змеюка повержена!");
+          } else {
+            setMooveAnswer("ТЫ МЁРТВ!");
+          }
+        }
+      } else {
+        if (wordsArray.some((e) => e.word === input)) {
+          wordInArrayMissMatch();
+        } else {
+          if (lastLetter === input[0]) {
+            lettersMatch();
+          } else {
+            lettersMissMatch();
+          }
         }
       }
     }
@@ -123,6 +167,7 @@ const Battlearea = () => {
     setMooveAnswer("начнём");
     setFirstPlayerHearts(5);
     setSecondPlayerHearts(5);
+    setisWin(false);
   }
 
   return (
@@ -166,6 +211,7 @@ const Battlearea = () => {
           type="text"
           placeholder="Следующий ход..."
           value={input}
+          disabled={mooveAnswer === "ТЫ МЁРТВ!"}
           required
           onChange={(event) => setInput(event.target.value)}
         />
@@ -175,9 +221,20 @@ const Battlearea = () => {
         <div className={s.answer}>{mooveAnswer}</div>
       </div>
       <div className={s.result}>
-        {wordsArray.map((item) => {
-          return <li key={item.key}>{item.word}</li>;
-        })}
+        <div>
+          {snakeAppear && (
+            <img src="https://key0.cc/images/small/10643_3a392b79930ddfc3f00bd751505386a9.png" />
+          )}
+
+          {isWin && (
+            <img src="https://freepngimg.com/thumb/ouroboros/1-2-ouroboros-free-png-image.png" />
+          )}
+        </div>
+        <div>
+          {wordsArray.map((item) => {
+            return <li key={item.key}>{item.word}</li>;
+          })}
+        </div>
       </div>
     </div>
   );
