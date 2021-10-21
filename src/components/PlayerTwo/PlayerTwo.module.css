@@ -1,0 +1,33 @@
+.player2 {
+  grid-area: player2;
+}
+
+.img {
+  position: relative;
+  top: 0px;
+  height: 350px;
+  transition: opacity 1s linear;
+}
+.imgOpacity {
+  height: 350px;
+  opacity: 0.4;
+  transition: opacity 1s linear;
+}
+.heart {
+  height: 40px;
+  position: relative;
+}
+.cross {
+  position: relative;
+  top: -380px;
+  height: 350px;
+  z-index: 2;
+  opacity: 0;
+}
+.crossOpacity {
+  position: relative;
+  top: -380px;
+  height: 350px;
+  z-index: 2;
+  opacity: 1;
+}
