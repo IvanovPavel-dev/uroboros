@@ -83,8 +83,13 @@ const Battlearea = () => {
   }, [secondPlayerHarts]);
 
   function lettersMatch() {
-    setWordsArray([...wordsArray, { word: input, key: uuidv4() }]);
-    setLastLetter(Array.from(input)[input.length - 1]);
+    setWordsArray([
+      ...wordsArray,
+      { word: input.toLowerCase(), key: uuidv4() },
+    ]);
+    setLastLetter(
+      Array.from(input.toLowerCase())[input.toLowerCase().length - 1]
+    );
     setIsFirstPlayer(isFirstPlayer === true ? false : true);
     setMooveAnswer("правильно");
   }
@@ -126,32 +131,41 @@ const Battlearea = () => {
     event.preventDefault();
     if (wordsArray.length === 0) {
       setIsFirstPlayer(false);
-      setGeneralFirstLetter(input[0]);
-      setLastLetter(Array.from(input)[input.length - 1]);
-      setWordsArray([...wordsArray, { word: input, key: uuidv4() }]);
+      setGeneralFirstLetter(input.toLowerCase()[0]);
+      setLastLetter(
+        Array.from(input.toLowerCase())[input.toLowerCase().length - 1]
+      );
+      setWordsArray([
+        ...wordsArray,
+        { word: input.toLowerCase(), key: uuidv4() },
+      ]);
       setMooveAnswer("продолжим");
     } else {
       if (firstPlayerHarts === 0 || secondPlayerHarts === 0) {
-        if (wordsArray.some((e) => e.word === input)) {
+        if (wordsArray.some((e) => e.word === input.toLowerCase())) {
           setMooveAnswer("ТЫ МЁРТВ!");
         } else {
           if (
-            lastLetter === input[0] &&
-            generalFirstLetter === Array.from(input)[input.length - 1]
+            lastLetter === input.toLowerCase()[0] &&
+            generalFirstLetter ===
+              Array.from(input.toLowerCase())[input.toLowerCase().length - 1]
           ) {
             setsnakeAppear(false);
             setisWin(true);
             setMooveAnswer("Змеюка повержена!");
-            setWordsArray([...wordsArray, { word: input, key: uuidv4() }]);
+            setWordsArray([
+              ...wordsArray,
+              { word: input.toLowerCase(), key: uuidv4() },
+            ]);
           } else {
             setMooveAnswer("ТЫ МЁРТВ!");
           }
         }
       } else {
-        if (wordsArray.some((e) => e.word === input)) {
+        if (wordsArray.some((e) => e.word === input.toLowerCase())) {
           wordInArrayMissMatch();
         } else {
-          if (lastLetter === input[0]) {
+          if (lastLetter === input.toLowerCase()[0]) {
             lettersMatch();
           } else {
             lettersMissMatch();
