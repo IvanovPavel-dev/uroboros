@@ -1,0 +1,9 @@
+.result {
+  grid-area: result;
+  background-color: #404040;
+  font-size: 44px;
+  list-style-type: none;
+}
+.snake {
+  height: 300px;
+}
