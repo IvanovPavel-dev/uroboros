@@ -8,6 +8,7 @@ import fourHearts from "../../images/rating-4.png";
 import fiveHearts from "../../images/rating-5.png";
 import deth from "../../images/deth.png";
 import Results from "../Results/Results";
+import PlayerOne from "../PlayerOne/PlayerOne";
 
 const Battlearea = () => {
   const [input, setInput] = useState("");
@@ -23,6 +24,7 @@ const Battlearea = () => {
   const [isValidInput, setIsValidInput] = useState(false);
   const [isWin, setisWin] = useState(false);
   const [snakeAppear, setsnakeAppear] = useState(false);
+
   useEffect(() => {
     if (input === "") {
       setIsValidInput(false);
@@ -173,21 +175,11 @@ const Battlearea = () => {
 
   return (
     <div className={s.battlearea}>
-      <div className={s.player1}>
-        <img
-          className={isFirstPlayer ? s.img : s.imgOpacity}
-          src="https://i.pinimg.com/originals/54/90/13/549013cde1373f75086b99b2d3c4e423.png"
-          alt={"logo"}
-        />
-        <div>
-          <img className={s.heart} src={firstPlayerHartsImg} alt={"logo"} />
-        </div>
-        <img
-          className={firstPlayerHarts === 0 ? s.crossOpacity : s.cross}
-          src="https://cs9.pikabu.ru/post_img/2020/06/26/6/1593158708124569366.png"
-          alt={"logo"}
-        />
-      </div>
+      <PlayerOne
+        isFirstPlayer={isFirstPlayer}
+        firstPlayerHarts={firstPlayerHarts}
+        firstPlayerHartsImg={firstPlayerHartsImg}
+      />
       <div className={s.player2}>
         <img
           className={!isFirstPlayer ? s.img : s.imgOpacity}
@@ -231,7 +223,6 @@ const Battlearea = () => {
         <div className={s.answer}>{mooveAnswer}</div>
       </div>
       <Results
-        className={s.result}
         wordsArray={wordsArray}
         snakeAppear={snakeAppear}
         isWin={isWin}
